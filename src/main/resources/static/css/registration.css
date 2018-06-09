@@ -1,0 +1,84 @@
+.validation-message {
+    font-style: normal;
+    font-size: 12px;
+    color: #FF1C19;
+}
+
+
+body {
+    background-color: #f2f2f2;
+    background-size: 100%;
+    margin: 0;
+    text-align: center;
+}
+.header {
+    background-color: #d7d5d6; /*#E8F3F6;*/
+    border-bottom: 0px solid #466995;
+    /*position: fixed;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    box-sizing: border-box;
+    display: block;
+    opacity: .85;
+    /* z-index: 11;
+    overflow: auto; */
+}
+
+
+
+.mynavbar {
+    padding-right: 30px;
+    float: right;
+
+}
+
+.header_ul{
+    list-style: none;
+
+}
+.mynavbar li {
+    color: #000;
+    display: inline-block;
+    font-family: "PF DinText Pro";
+    font-size: 24px;
+    text-align: left;
+    font-weight: 300;
+    /* text-transform: uppercase;  */
+    padding: 20px 20px;
+
+}
+.mynavbar li a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.logo {
+    width: 20%;
+    float: left;
+}
+
+canvas{
+    top:0;
+}
+
+.line_main{
+    height: 85vh;
+    background: no-repeat;
+    width: 100%;
+    background: url(../images/sushi1.jpg) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+.form-signup {
+    max-width: 420px;
+    padding: 30px 38px 66px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: #eee;
+    border: 3px dotted rgba(0,0,0,0.1);
+}

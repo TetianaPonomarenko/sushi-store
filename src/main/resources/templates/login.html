@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <a href="/">
+            <canvas id="logo" width="150" height="90"></canvas>
+        </a>
+    </div>
+
+    <nav id="primary-navigation" class="mynavbar">
+        <ul class="header-ul">
+            <li><a href="/">Order Online</a></li>
+            <li><a href="/menu/categories">Menu</a></li>
+            <li><a href="/registration">Join Us</a></li>
+            <li><a href="#">About</a></li>
+
+        </ul>
+
+    </nav>
+</header>
+
+
+<form th:action="@{/registration}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+</form>
+
+<div class="container line_main">
+    <form th:action="@{/login}" method="POST" class="form-signin">
+        <h2 class="form-signin-heading" th:text="Welcome"></h2>
+        <br/>
+
+        <input type="text" id="email" name="login" th:placeholder="Login" required
+               class="form-control" maxlength="50"/> <br/>
+        <input type="password" th:placeholder="Password" required maxlength="20"
+               id="password" name="password" class="form-control"/> <br/>
+
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+                th:text="Login"></button>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    // Переменные
+    var canvas, ctx;
+    var bPlay = true;
+    var iAngle = 0;
+    var sText = '   Sushi   Delivery';
+
+    // Функции рисования
+    function clear() { // Очистка элемента canvas
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+
+    function drawScene() { // Основная функция вывода сцены
+        if (bPlay == 1) {
+            clear(); // Очистка элемента canvas
+
+            // Меняем угол
+            iAngle -= 0.005;
+            // и выводим текст по кругу с радиусом 40 в центре элемента canvas
+            draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 35, Math.PI / 2 - iAngle);
+        }
+    }
+
+    function draw3DTextCircle(s, x, y, radius, iSAngle) {
+        // Радиан на символ
+        var fRadPerLetter = 2 * Math.PI / s.length;
+        // Сохраняем контекст, переводим и вращаем его
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(iSAngle);
+        // Количество дополнительных нижних слоев
+        var iDepth = 4;
+        // Устанавливаем темно-зеленый цвет для дополнительных слоев
+        ctx.fillStyle = '#000';
+        // Обрабоатываем каждый символ строки
+        for (var i = 0; i < s.length; i++) {
+            ctx.save();
+            ctx.rotate(i * fRadPerLetter);
+            // Выводим дополнительные слои
+            for (var n = 0; n < iDepth; n++) {
+                ctx.fillText(s[i], n, n - radius);
+            }
+            // Параметры тени
+            ctx.fillStyle = '#52BDAC';
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = iDepth + 2;
+            ctx.shadowOffsetY = iDepth + 2;
+            // выводим символы
+            ctx.fillText(s[i], 0, -radius);
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+
+    // Привязываем событие onload
+    if (window.attachEvent) {
+        window.attachEvent('onload', main_init);
+    } else {
+        if (window.onload) {
+            var curronload = window.onload;
+            var newonload = function () {
+                curronload();
+                main_init();
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = main_init;
+        }
+    }
+
+    function main_init() {
+        // Создаем элемент canvas и объект context
+        canvas = document.getElementById('logo');
+        ctx = canvas.getContext('2d');
+        // Инициализуем строку текста
+        ctx.font = '18px Verdana';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Выводим текст по кругу с радуисом 160 по центру элемента canvas
+        draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 120, Math.PI / 2 - iAngle);
+        setInterval(drawScene, 30); // Выводим сцену
+    }
+</script>
+
+
+</body>
+</html>

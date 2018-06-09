@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sushi Store</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+   <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+</head>
+
+<body class="home">
+
+<header class="header">
+
+    <div class="logo">
+        <a href="/">
+        <canvas id="logo" width="150" height="90"> </canvas>
+        </a>
+    </div>
+
+    <nav id="primary-navigation" class="navbar">
+        <ul class="header-ul">
+            <li > <a href="/">Order Online</a></li>
+            <li> <a href="/menu/categories">Menu</a></li>
+            <li> <a href="#line_earning">Join Us</a></li>
+            <li> <a href="#">About</a></li>
+        </ul>
+    </nav>
+
+
+</header>
+
+<div class="content">
+
+    <div class="line_main" id="line_main">
+        <div class ="name_company">
+            <h1>Handcrafted Sushi Delivery</h1>
+        </div>
+    </div>
+
+
+
+    <div class="line_about" id="line_about">
+
+        <div class="text" id="text_1">
+            <h4>Lovingly handmade sushi (and more)</h4>
+            <p>Have your lunch or dinner delivered fresh to your home or office
+                or visit one of our eight London eateries for an eat-in feast or takeaway.
+                Choose Feng for mouth-watering sushi, flavoursome chicken and delectable gyoza:
+                perfect as a treat or if you’re rushed off your feet. </p>
+            <p class = "learn_more"><a href="#">MENU</a></p>
+        </div>
+
+        <div class="right_side_image"></div>
+
+    </div>
+
+
+    <div class="line_suggestion" id="line_suggestion">
+        <h3>HOT Suggestion</h3>
+        <div class="suggestion" >
+            <div class="top_side"  id="top_suggestion_1"> </div>
+            <div class="low_side" id="low_suggestion_1">
+                <p>SALE 20% </p>
+
+            </div>
+        </div>
+        <div class="suggestion"  >
+            <div class="top_side" id="top_suggestion_2"> </div>
+            <div class="low_side" id="low_suggestion_2">
+                <p>SALE 50%</p>
+            </div>
+        </div>
+
+        <div class="suggestion"  >
+
+            <div class="top_side" id="top_suggestion_3"> </div>
+            <div class="low_side" id="low_suggestion_3">
+                <p>SALE 20%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="advertising" id="advertising">
+
+            <div class="left_side_image">    </div>
+
+
+            <div class="text" id="text_2">
+                <h4>Lovingly handmade sushi (and more)</h4>
+                <p>Have your lunch or dinner delivered fresh to your home or office
+                or visit one of our eight London eateries for an eat-in feast or takeaway.
+                Choose Feng for mouth-watering sushi, flavoursome chicken and delectable gyoza:
+                perfect as a treat or if you’re rushed off your feet. </p>
+                <p class = "learn_more"><a href="#">ORDER ONLINE</a></p>
+            </div>
+
+    </div>
+
+    <div class="line_earning" id="line_earning" >
+
+        <h4>Earn Free Sushi</h4>
+        <div class="wrap_text">
+            <p> Order. Earn points. Repeat. </p>
+            <p> Redeem your points for free sushi and make your taste
+                buds and your wallet happy. </p>
+        </div>
+        <div class="button_orange">
+            <a href="/registration" >Registration</a>
+        </div>
+        <div class="button_orange">
+            <a href="/login" >Log In</a>
+        </div>
+    </div>
+
+</div>
+
+
+<footer>
+    <div class="footer_signup">
+        <div class="text_signup">
+            <p >Created by Tetiana Ponomarenko, 2018 © </p>
+        </div>
+    </div>
+</footer>
+
+
+
+<script type="text/javascript">
+    // Переменные
+    var canvas, ctx;
+    var bPlay = true;
+    var iAngle = 0;
+    var sText = '   Sushi   Delivery';
+
+    // Функции рисования
+    function clear() { // Очистка элемента canvas
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+    function drawScene() { // Основная функция вывода сцены
+        if (bPlay == 1) {
+            clear(); // Очистка элемента canvas
+
+            // Меняем угол
+            iAngle-=0.005;
+            // и выводим текст по кругу с радиусом 40 в центре элемента canvas
+            draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 35, Math.PI / 2 - iAngle);
+        }}
+    function draw3DTextCircle(s, x, y, radius, iSAngle){
+        // Радиан на символ
+        var fRadPerLetter = 2*Math.PI / s.length;
+        // Сохраняем контекст, переводим и вращаем его
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.rotate(iSAngle);
+        // Количество дополнительных нижних слоев
+        var iDepth = 4;
+        // Устанавливаем темно-зеленый цвет для дополнительных слоев
+        ctx.fillStyle = '#000';
+        // Обрабоатываем каждый символ строки
+        for (var i=0; i<s.length; i++) {
+            ctx.save();
+            ctx.rotate(i*fRadPerLetter);
+            // Выводим дополнительные слои
+            for (var n = 0; n < iDepth; n++) {
+                ctx.fillText(s[i], n, n - radius);
+            }
+            // Параметры тени
+            ctx.fillStyle = '#52BDAC';
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = iDepth + 2;
+            ctx.shadowOffsetY = iDepth + 2;
+            // выводим символы
+            ctx.fillText(s[i], 0, -radius);
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+    // Привязываем событие onload
+    if (window.attachEvent) {
+        window.attachEvent('onload', main_init);
+    } else {
+        if(window.onload) {
+            var curronload = window.onload;
+            var newonload = function() {
+                curronload();
+                main_init();
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = main_init;
+        }}
+    function main_init() {
+        // Создаем элемент canvas и объект context
+        canvas = document.getElementById('logo');
+        ctx = canvas.getContext('2d');
+        // Инициализуем строку текста
+        ctx.font = '18px Verdana';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Выводим текст по кругу с радуисом 160 по центру элемента canvas
+        draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 120, Math.PI / 2 - iAngle);
+        setInterval(drawScene, 30); // Выводим сцену
+    }
+</script>
+
+
+</body>
+
+</html>

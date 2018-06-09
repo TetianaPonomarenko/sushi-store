@@ -1,0 +1,71 @@
+.validation-message {
+    font-style: normal;
+    font-size: 12px;
+    color: #FF1C19;
+}
+
+
+body {
+    background-color: #f2f2f2;
+    background-size: 100%;
+    margin: 0;
+    text-align: center;
+}
+.header {
+    background-color: #d7d5d6; /*#E8F3F6;*/
+    border-bottom: 0px solid #466995;
+    /*position: fixed;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    box-sizing: border-box;
+    display: block;
+    opacity: .85;
+    /* z-index: 11;
+    overflow: auto; */
+}
+
+
+
+.mynavbar {
+    padding-right: 30px;
+    float: right;
+
+}
+
+.header_ul{
+    list-style: none;
+
+}
+.mynavbar li {
+    color: #000;
+    display: inline-block;
+    font-family: "PF DinText Pro";
+    font-size: 24px;
+    text-align: left;
+    font-weight: 300;
+    /* text-transform: uppercase;  */
+    padding: 20px 20px;
+
+}
+.mynavbar li a{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.logo {
+    width: 20%;
+    float: left;
+}
+
+canvas{
+    top:0;
+}
+
+.myrow{
+    margin-top: 45px;
+    margin-left: 15px;
+    margin-right: 15px;
+}

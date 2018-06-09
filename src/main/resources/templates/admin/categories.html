@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Page</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <a href="/"><canvas id="logo" width="150" height="90"> </canvas></a>
+    </div>
+
+    <nav id="primary-navigation" class="mynavbar">
+        <ul class="header-ul">
+            <li > <a href="/admin/home">Home</a></li>
+            <li > <a href="/admin/meals">Meals</a></li>
+            <li > <a href="/admin/categories">Categories</a></li>
+            <li> <a href="#">Create</a></li>
+
+            <li>
+                <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-md btn-danger" name="registration"
+                            type="Submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Список категорий</h3>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="create.html" th:href="@{/admin/createcategory}">Добавить новую категорию</a>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th class="text-right">ID</th>
+                <th>Название</th>
+                <th class="text-right">Изображение</th>
+                <th class="text-center">Действия</th>
+            </tr>
+
+            <tr th:each="category : ${categoryList}">
+                <td class="text-right" th:text="${category.id}"></td>
+                <td class="text-left" th:text="${category.name}"></td>
+                <td class="text-right" th:text="${category.image}"></td>
+
+                <td class="text-center">
+                    <a class="btn btn-default  btn-primary" href="edit.html" th:href="@{/admin/edit/category(id=${category.id})}">Редактировать</a>
+                    <input type="submit"
+                           class="btn btn-default  btn-danger"
+                           value="В архив"  disabled/>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    // Переменные
+    var canvas, ctx;
+    var bPlay = true;
+    var iAngle = 0;
+    var sText = '   Sushi   Delivery';
+
+    // Функции рисования
+    function clear() { // Очистка элемента canvas
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+    function drawScene() { // Основная функция вывода сцены
+        if (bPlay == 1) {
+            clear(); // Очистка элемента canvas
+
+            // Меняем угол
+            iAngle-=0.005;
+            // и выводим текст по кругу с радиусом 40 в центре элемента canvas
+            draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 35, Math.PI / 2 - iAngle);
+        }}
+    function draw3DTextCircle(s, x, y, radius, iSAngle){
+        // Радиан на символ
+        var fRadPerLetter = 2*Math.PI / s.length;
+        // Сохраняем контекст, переводим и вращаем его
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.rotate(iSAngle);
+        // Количество дополнительных нижних слоев
+        var iDepth = 4;
+        // Устанавливаем темно-зеленый цвет для дополнительных слоев
+        ctx.fillStyle = '#000';
+        // Обрабоатываем каждый символ строки
+        for (var i=0; i<s.length; i++) {
+            ctx.save();
+            ctx.rotate(i*fRadPerLetter);
+            // Выводим дополнительные слои
+            for (var n = 0; n < iDepth; n++) {
+                ctx.fillText(s[i], n, n - radius);
+            }
+            // Параметры тени
+            ctx.fillStyle = '#52BDAC';
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = iDepth + 2;
+            ctx.shadowOffsetY = iDepth + 2;
+            // выводим символы
+            ctx.fillText(s[i], 0, -radius);
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+    // Привязываем событие onload
+    if (window.attachEvent) {
+        window.attachEvent('onload', main_init);
+    } else {
+        if(window.onload) {
+            var curronload = window.onload;
+            var newonload = function() {
+                curronload();
+                main_init();
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = main_init;
+        }}
+    function main_init() {
+        // Создаем элемент canvas и объект context
+        canvas = document.getElementById('logo');
+        ctx = canvas.getContext('2d');
+        // Инициализуем строку текста
+        ctx.font = '18px Verdana';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Выводим текст по кругу с радуисом 160 по центру элемента canvas
+        draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 120, Math.PI / 2 - iAngle);
+        setInterval(drawScene, 30); // Выводим сцену
+    }
+</script>
+
+</body>
+</html>

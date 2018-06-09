@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Page</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}" />
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="/"><canvas id="logo" width="150" height="90"> </canvas></a>
+        </div>
+
+        <nav id="primary-navigation" class="mynavbar">
+            <ul class="header-ul">
+                <li > <a href="/admin/home">Home</a></li>
+                <li > <a href="/admin/meals">Meals</a></li>
+                <li > <a href="/admin/categories">Categories</a></li>
+                <li> <a href="#">Create</a></li>
+
+                <li>
+                    <form th:action="@{/logout}" method="get">
+                    <button class="btn btn-md btn-danger" name="registration"
+                            type="Submit">Logout</button>
+                </form>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <div class="row myrow">
+
+        <div class="col-4">
+            <div class="card" >
+                <div class="card-header">
+                    Блюда
+                </div>
+
+                <img class="card-img-top" src="/images/meals.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Блюда</h5>
+                    <p class="card-text">Просмотр, редактирование и добавление новых блюд в ассортимент ресторана.</p>
+                    <a href="/admin/meals" class="btn btn-primary">Продолжить</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card" >
+                <div class="card-header">
+                    Категории
+                </div>
+                <img class="card-img-top" src="/images/categories.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Категории</h5>
+                    <p class="card-text">Просмотр, редактирование и добавление новых категорий блюд.</p>
+                    <a href="/admin/categories" class="btn btn-primary">Продолжить</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card" >
+                <div class="card-header">
+                    Статистика
+                </div>
+                <img class="card-img-top" src="/images/statistic.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Статистика</h5>
+                    <p class="card-text">Сводка данных по самым активным клиентам, частозаказываемым блюдам и ect.</p>
+                    <a href="#" class="btn btn-primary" >Продолжить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Переменные
+        var canvas, ctx;
+        var bPlay = true;
+        var iAngle = 0;
+        var sText = '   Sushi   Delivery';
+
+        // Функции рисования
+        function clear() { // Очистка элемента canvas
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
+        function drawScene() { // Основная функция вывода сцены
+            if (bPlay == 1) {
+                clear(); // Очистка элемента canvas
+
+                // Меняем угол
+                iAngle-=0.005;
+                // и выводим текст по кругу с радиусом 40 в центре элемента canvas
+                draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 35, Math.PI / 2 - iAngle);
+            }}
+        function draw3DTextCircle(s, x, y, radius, iSAngle){
+            // Радиан на символ
+            var fRadPerLetter = 2*Math.PI / s.length;
+            // Сохраняем контекст, переводим и вращаем его
+            ctx.save();
+            ctx.translate(x,y);
+            ctx.rotate(iSAngle);
+            // Количество дополнительных нижних слоев
+            var iDepth = 4;
+            // Устанавливаем темно-зеленый цвет для дополнительных слоев
+            ctx.fillStyle = '#000';
+            // Обрабоатываем каждый символ строки
+            for (var i=0; i<s.length; i++) {
+                ctx.save();
+                ctx.rotate(i*fRadPerLetter);
+                // Выводим дополнительные слои
+                for (var n = 0; n < iDepth; n++) {
+                    ctx.fillText(s[i], n, n - radius);
+                }
+                // Параметры тени
+                ctx.fillStyle = '#52BDAC';
+                ctx.shadowColor = 'black';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = iDepth + 2;
+                ctx.shadowOffsetY = iDepth + 2;
+                // выводим символы
+                ctx.fillText(s[i], 0, -radius);
+                ctx.restore();
+            }
+            ctx.restore();
+        }
+        // Привязываем событие onload
+        if (window.attachEvent) {
+            window.attachEvent('onload', main_init);
+        } else {
+            if(window.onload) {
+                var curronload = window.onload;
+                var newonload = function() {
+                    curronload();
+                    main_init();
+                };
+                window.onload = newonload;
+            } else {
+                window.onload = main_init;
+            }}
+        function main_init() {
+            // Создаем элемент canvas и объект context
+            canvas = document.getElementById('logo');
+            ctx = canvas.getContext('2d');
+            // Инициализуем строку текста
+            ctx.font = '18px Verdana';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Выводим текст по кругу с радуисом 160 по центру элемента canvas
+            draw3DTextCircle(sText, canvas.width / 2, canvas.height / 2, 120, Math.PI / 2 - iAngle);
+            setInterval(drawScene, 30); // Выводим сцену
+        }
+    </script>
+
+</body>
+</html>

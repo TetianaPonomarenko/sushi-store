@@ -1,0 +1,362 @@
+﻿*{
+	margin: 0;
+	padding: 0;	
+}
+html{
+	font-size: 4rem;
+}
+
+body {
+  background-color: #f2f2f2; 
+  background-size: 100%;
+  margin: 0;
+  text-align: center;
+} 
+.header {
+  background-color: #d7d5d6; /*#E8F3F6;*/
+  border-bottom: 0px solid #466995;
+  position: sticky; /*fixed;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh; 
+  box-sizing: border-box;
+  display: block;
+  opacity: .85;
+  /* z-index: 11;
+  overflow: auto; */
+}
+
+
+.navbar {
+	padding-right: 30px;
+	float: right;
+    
+}
+
+.header_ul{
+	list-style: none;
+	
+}
+.navbar li {
+  color: #000;
+  display: inline-block;
+  font-family: "PF DinText Pro";
+  font-size: 0.5rem;
+  text-align: left;
+  font-weight: 300;
+ /* text-transform: uppercase;  */
+  padding: 20px 20px;
+  
+}
+.navbar li a{
+	text-decoration: none;
+	color: inherit;
+}
+/*
+.navbar:hover li:hover {
+	background-color: rgba(7, 7, 7, 0.4);
+}  */
+
+@media screen and (max-width: 800px) {
+	html{
+		font-size: 3rem;
+	}
+	
+	.navbar {
+		min-height: 90px;
+		min-width: 130px;
+		padding:0;
+		background: url(../images/m.png) no-repeat center;
+   
+	}	
+	.header_ul {
+		top: 0;
+		right: 0;
+		
+	}
+	.navbar li {
+		display: none; 
+		margin: 0;
+		
+	}
+	
+	.navbar:hover {
+		background-image: none;		
+		background-color: #fff;
+	}
+	.navbar:hover li {
+		display: block;
+	}
+	
+	.navbar:hover li:hover {
+		display: block;
+		background-color: rgba(7, 7, 7, 0.4);
+	}
+		
+		.advertising{
+			display:none;
+		}
+ 
+}
+
+
+
+
+
+.line_main{
+	height: 85vh;
+	background: no-repeat;
+	width: 100%; 
+	background: url(../images/sushi1.jpg) no-repeat center top;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+     background-size: cover;
+}
+
+.name_company{
+	padding-top: 50px; 
+}
+.name_company h1{
+	margin: 0 auto;
+	font-size: 0.8rem;
+    font-family: "Palatino Linotype";
+    font-weight: 300;
+	z-index: 1;
+    
+}
+
+
+.line_about{
+	height: 85vh;
+}
+
+
+.text {
+    
+	width: 50%;
+	height: 85vh;
+	display: inline-block;
+	overflow: hidden;
+}
+#text_1{
+	float: left;
+}
+.text h4{
+	
+    padding-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #52BDAC;
+	font-size: 1rem;
+	font-family: 'Exo', sans-serif;
+}
+.text p{
+	
+	padding: 40px;
+	font-size: 0.4rem;
+	color: #000;
+    font-weight: 100;
+}
+.learn_more{
+	
+}
+.learn_more a{
+	text-decoration: none;
+	color: #52BDAC;
+}
+
+.right_side_image{
+	margin-left: 50%;
+	height: 85vh;
+	
+	background: url(../images/sushi3.jpg) no-repeat center right;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+}
+.image{
+	background-size: cover;
+    background-position: center center;
+}
+
+.line_suggestion{
+	 margin: 10px auto;
+	 height: 85vh;
+	 
+}
+
+.line_suggestion h3{
+	padding: 10px 0;
+	font-size: 1.2rem;
+	
+	font-weight: 300;
+	color: #ED6F5F;
+	text-transform: uppercase; 
+	
+	font-family: 'Exo', sans-serif;
+	
+	
+	 
+}
+
+.suggestion{
+	top:0;
+	display: inline-block;
+	border: 4px double black;
+	height: 55vh;
+	margin: 3%;
+	width: 25%;
+}
+.top_side {
+	height: 70%;
+	
+	
+}
+.low_side {
+	text-align:center;
+	height: 30%;
+	background-color: #ed6f5fc7; /*#ED6F5F; */	
+}
+
+.low_side p{
+	font-size: 2rem;
+}
+#top_suggestion_1 {
+	background: url(../images/sug1.jpg) no-repeat center right;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    background-position: center center;
+}
+#top_suggestion_2 {
+	
+	background: url(../images/sug2.jpeg) no-repeat center right;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    background-position: center center;
+}
+#top_suggestion_3 {
+	background: url(../images/sug3.jpg) no-repeat center right;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+    background-position: center center;
+}
+
+
+
+
+.low_side p{
+	padding: 10px 0;
+	font-size: 0.8rem;
+    font-family: "Palatino Linotype";
+	font-weight: 300;
+	color: #000;
+	
+}
+
+.left_side_image{
+	
+	height: 85vh;
+	max-height: 85vh;
+	width:50%;
+	display: inline-block;
+	
+	background: url(../images/sushi5.jpg) no-repeat center right;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+     background-size: cover;
+}
+
+#text_2{
+	float: right;
+}
+
+.line_earning{
+	padding: 50px 0;
+	width: 100%;
+	background-color: #52BDAC;
+	padding-bottom: 100px;
+	
+	
+}
+
+.line_earning h4{
+	
+	color: #fff;	
+	font-size: 1.1rem;
+	font-family: 'Exo', sans-serif;
+	
+}
+.line_earning p{
+	
+	color: #fff;	
+	font-size: 0.5rem;
+	font-family: 'Exo', sans-serif;
+}
+
+.line_earning a{
+	text-decoration: none;
+	color: #fff;	
+	font-size: 0.6rem;
+	font-family: 'Exo', sans-serif;
+	padding: 33px 50px;
+    background-color: #ED6F5F;
+}
+
+.button_orange{
+	
+    text-transform: uppercase;
+    display: inline;
+}
+.wrap_text{
+	margin-bottom: 60px;
+}
+
+.footer_signup{
+	background-color: #B7B7AD;
+    padding: 45px 50px;
+    margin: 0 auto;
+    position: relative;
+}
+.text_signup{
+	/*width: 50%;*/
+	/*float: left;*/
+	display: inline-block;
+	color: #fff;	
+	font-size: 0.7rem;
+	font-family: 'Exo', sans-serif;
+}
+.form_signup{
+	margin-left: 50%;
+}
+
+.third{
+	padding: 10px;
+	display: inline-block;
+}
+.input-text {
+	padding: 10px;
+}
+.input_button {
+	padding: 10px;
+	font-family: 'Exo', sans-serif;	
+    text-transform: uppercase;
+}
+
+
+.logo {
+	width: 20%;
+	float: left;
+}
+
+canvas{
+	top:0;
+}
